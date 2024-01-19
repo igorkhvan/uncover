@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "915398876029",
+    "project_id": "uncover-260b2",
+    "storage_bucket": "uncover-260b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915398876029:android:5ee13fc79dc39bc1e98a14",
+        "android_client_info": {
+          "package_name": "app.devbase.uncover"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAijB0FdMOy5_43oenfEgEiwz1kBEurNb4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
