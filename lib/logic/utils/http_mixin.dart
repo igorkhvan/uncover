@@ -27,31 +27,33 @@ mixin httpRequestMixin {
 
   void resolveStatusCode(http.Response response, Function? callback) {
     switch (response.statusCode) {
-      case 200: {
-        callback;
-        print('code 200');
-        // setAccount(AccountModel.fromJson(jsonDecode(response.body)["user"]));
-        // setErrorMessage('');
-        // setLoading(false);
-        // isSuccessful = true;
-      }
-      break;
+      case 200:
+        {
+          if (callback != null) callback(response);
+          // setAccount(AccountModel.fromJson(jsonDecode(response.body)["user"]));
+          // setErrorMessage('');
+          // setLoading(false);
+          // isSuccessful = true;
+        }
+        break;
 
-      case 422: {
-        print(response.reasonPhrase);
-      }
+      case 422:
+        {
 
-      case 500: {
-        // setErrorMessage('Ошибка сервера');
-        print('code 500');
-      }
-      break;
+        }
 
-      default: {
-        print(response.reasonPhrase);
-        // setErrorMessage(response.reasonPhrase);
-      }
-      break;
+      case 500:
+        {
+          // setErrorMessage('Ошибка сервера');
+        }
+        break;
+
+      default:
+        {
+          print(response.reasonPhrase);
+          // setErrorMessage(response.reasonPhrase);
+        }
+        break;
     }
   }
 }
