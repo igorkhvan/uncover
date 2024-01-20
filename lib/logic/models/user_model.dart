@@ -10,7 +10,7 @@ class UserModel {
   @JsonKey(includeFromJson: false)
   String? authToken;
   @JsonKey(includeFromJson: false)
-  final String? firebaseToken;
+  String? firebaseToken;
   final String? firstName;
   final String? lastName;
 

@@ -10,17 +10,14 @@ class SharedPrefs {
   final String _authToken = 'authToken';
   final String _avatar = 'avatar';
 
-  final Future<SharedPreferences> _sharedPrefs =
-      SharedPreferences.getInstance();
-
-  Future<void> setFirebaseToken(String firebaseToken) async {
-    final sharedPrefs = await _sharedPrefs;
-    sharedPrefs.setString(_firebaseToken, firebaseToken);
+  Future<void> setFirebaseToken(String? firebaseToken) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(_firebaseToken, firebaseToken ?? 'No fcm token received');
   }
 
   Future<String?> getFirebaseToken() async {
-    final sharedPrefs = await _sharedPrefs;
-    return sharedPrefs.getString(_firebaseToken);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_firebaseToken);
   }
 
   Future<void> setUser(UserModel user) async {
@@ -28,7 +25,7 @@ class SharedPrefs {
     await prefs.setString(_uuid, user.uuid ?? '');
     await prefs.setString(_firstName, user.firstName ?? '');
     await prefs.setString(_lastName, user.lastName ?? '');
-    await prefs.setString(_firebaseToken, user.firebaseToken ?? '');
+    // await prefs.setString(_firebaseToken, user.firebaseToken ?? '');
     await prefs.setString(_phone, user.phone ?? '');
     await prefs.setString(_authToken, user.authToken ?? '');
     await prefs.setString(_avatar, user.avatar ?? '');
@@ -41,10 +38,15 @@ class SharedPrefs {
       uuid: prefs.getString(_uuid),
       firstName: prefs.getString(_firstName),
       lastName: prefs.getString(_lastName),
-      firebaseToken: prefs.getString(_firebaseToken),
+      // firebaseToken: prefs.getString(_firebaseToken),
       phone: prefs.getString(_phone),
       authToken: prefs.getString(_authToken),
       avatar: prefs.getString(_avatar),
     );
+  }
+
+  Future<void> deleteUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
   }
 }

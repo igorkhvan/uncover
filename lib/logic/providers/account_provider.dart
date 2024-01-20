@@ -9,37 +9,45 @@ import '../services/shared_prefs_service.dart';
 class AccountProvider extends ChangeNotifier {
 
   UserModel? _user;
-
-  final SharedPrefs _sharedPrefs = SharedPrefs();
+  // final SharedPrefs _sharedPrefs = SharedPrefs();
+  String? _errorMessage;
 
   Future<void> register (String? firstName, String? lastName, String? phone) async {
-    late bool isSuccess;
     AccountRequest request = AccountRequest();
 
     Map<String, dynamic> body = {
       constant.firstName: firstName ?? '',
       constant.lastName: lastName ?? '',
       constant.phone: phone ?? '',
-      constant.deviceToken: '1234567890'
+      constant.deviceToken: await SharedPrefs().getFirebaseToken(),
     };
 
     request.register(body, setUserFromHttp);
   }
 
   void setUserFromHttp(http.Response response) {
-    UserModel user = UserModel.fromJson(jsonDecode(response.body)["user"]);
-    user.authToken = jsonDecode(response.body)["authToken"];
-    setUser(user);
+    UserModel currentUser = UserModel.fromJson(jsonDecode(response.body)["user"]);
+    currentUser.authToken = jsonDecode(response.body)["authToken"];
+    user = currentUser;
   }
 
   void setUserFromSharedPrefs() async {
-    _user = await _sharedPrefs.getUser();
+    _user = await SharedPrefs().getUser();
     notifyListeners();
   }
 
-  void setUser(user) {
+  set user(user) {
     _user = user;
     notifyListeners();
-    _sharedPrefs.setUser(user);
+    SharedPrefs().setUser(user);
   }
+
+  get user => _user;
+
+  set fcmToken(token) {
+    _user?.firebaseToken = token ?? 'fcm token is not defined';
+    notifyListeners();
+  }
+
+  get fcmToken => _user?.firebaseToken ?? 'fcm token is empty';
 }

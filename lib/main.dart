@@ -7,9 +7,12 @@ import 'package:uncover/ui/theme_data.dart' as my_theme;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'firebase_options.dart';
+import 'logic/services/shared_prefs_service.dart';
+
+String? _fcmToken;
+final SharedPrefs _sharedPrefs = SharedPrefs();
 
 Future<void> main() async {
-
   runApp(
     MultiProvider(
       providers: [
@@ -23,9 +26,13 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // final fcmToken = await FirebaseMessaging.instance.getToken().then((value) {
-  //   print(value);
-  // });
+  while (true) {
+    _fcmToken = await FirebaseMessaging.instance.getToken();
+    if (_fcmToken != null) {
+      _sharedPrefs.setFirebaseToken(_fcmToken);
+      break;
+    }
+  }
 
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 

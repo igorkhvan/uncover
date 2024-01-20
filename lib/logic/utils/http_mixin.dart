@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:http/http.dart' as http;
 
 mixin httpRequestMixin {
@@ -30,10 +28,6 @@ mixin httpRequestMixin {
       case 200:
         {
           if (callback != null) callback(response);
-          // setAccount(AccountModel.fromJson(jsonDecode(response.body)["user"]));
-          // setErrorMessage('');
-          // setLoading(false);
-          // isSuccessful = true;
         }
         break;
 
