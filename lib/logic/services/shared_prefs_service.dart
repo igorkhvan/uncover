@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uncover/logic/models/user_model.dart';
+import 'package:uncover/logic/models/account_model.dart';
 
 class SharedPrefs {
   final String _uuid = 'uuid';
@@ -20,7 +20,12 @@ class SharedPrefs {
     return prefs.getString(_firebaseToken);
   }
 
-  Future<void> setUser(UserModel user) async {
+  Future<String?> getAuthToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_authToken);
+  }
+
+  Future<void> setAccount(AccountModel user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(_uuid, user.uuid ?? '');
     await prefs.setString(_firstName, user.firstName ?? '');
@@ -31,10 +36,10 @@ class SharedPrefs {
     await prefs.setString(_avatar, user.avatar ?? '');
   }
 
-  Future<UserModel> getUser() async {
+  Future<AccountModel> getAccount() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    return UserModel(
+    return AccountModel(
       uuid: prefs.getString(_uuid),
       firstName: prefs.getString(_firstName),
       lastName: prefs.getString(_lastName),

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:uncover/logic/models/user_model.dart';
+import 'package:uncover/logic/models/account_model.dart';
 import 'package:uncover/logic/requests/account_request.dart';
 import 'package:uncover/logic/services/constants_service.dart' as constant;
 import 'package:http/http.dart' as http;
@@ -8,11 +8,11 @@ import '../services/shared_prefs_service.dart';
 
 class AccountProvider extends ChangeNotifier {
 
-  UserModel? _user;
-  // final SharedPrefs _sharedPrefs = SharedPrefs();
+  AccountModel? _account;
+  final SharedPrefs _sharedPrefs = SharedPrefs();
   String? _errorMessage;
 
-  Future<void> register (String? firstName, String? lastName, String? phone) async {
+  Future<bool> register (String? firstName, String? lastName, String? phone) async {
     AccountRequest request = AccountRequest();
 
     Map<String, dynamic> body = {
@@ -21,33 +21,32 @@ class AccountProvider extends ChangeNotifier {
       constant.phone: phone ?? '',
       constant.deviceToken: await SharedPrefs().getFirebaseToken(),
     };
-
-    request.register(body, setUserFromHttp);
+    return request.register(body, setAccountFromHttp);
   }
 
-  void setUserFromHttp(http.Response response) {
-    UserModel currentUser = UserModel.fromJson(jsonDecode(response.body)["user"]);
+  void setAccountFromHttp(http.Response response) {
+    AccountModel currentUser = AccountModel.fromJson(jsonDecode(response.body)["user"]);
     currentUser.authToken = jsonDecode(response.body)["authToken"];
-    user = currentUser;
+    account = currentUser;
   }
 
-  void setUserFromSharedPrefs() async {
-    _user = await SharedPrefs().getUser();
+  void setAccountFromSharedPrefs() async {
+    _account = await SharedPrefs().getAccount();
     notifyListeners();
   }
 
-  set user(user) {
-    _user = user;
+  set account(account) {
+    _account = account;
     notifyListeners();
-    SharedPrefs().setUser(user);
+    SharedPrefs().setAccount(account);
   }
 
-  get user => _user;
+  get account => _account;
 
   set fcmToken(token) {
-    _user?.firebaseToken = token ?? 'fcm token is not defined';
+    _account?.firebaseToken = token ?? 'fcm token is not defined';
     notifyListeners();
   }
 
-  get fcmToken => _user?.firebaseToken ?? 'fcm token is empty';
+  get fcmToken => _account?.firebaseToken ?? 'fcm token is empty';
 }

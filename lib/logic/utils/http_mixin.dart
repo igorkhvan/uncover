@@ -23,6 +23,16 @@ mixin httpRequestMixin {
     );
   }
 
+  Future<http.Response> httpGet(String? url, String? authToken) {
+    return http.get(
+      Uri.parse(url ?? ''),
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${authToken ?? ''}'
+      },
+    );
+  }
+
   void resolveStatusCode(http.Response response, Function? callback) {
     switch (response.statusCode) {
       case 200:
@@ -44,7 +54,6 @@ mixin httpRequestMixin {
 
       default:
         {
-          print(response.reasonPhrase);
           // setErrorMessage(response.reasonPhrase);
         }
         break;

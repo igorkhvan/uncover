@@ -2,9 +2,22 @@ import 'package:uncover/logic/utils/http_mixin.dart';
 import 'package:uncover/logic/services/constants_service.dart' as constant;
 
 class AccountRequest with httpRequestMixin {
-  Future<void> register(Map<String, dynamic>? body, Function? callback) async {
+
+  Future<bool> register(Map<String, dynamic>? body, Function? callback) async {
+    bool success = false;
     await httpPost(constant.baseURL + constant.registration, body).then((response) {
       resolveStatusCode(response, callback);
+      if(response.statusCode == 200) success = true;
     });
+    return success;
+  }
+
+  Future<bool> updateUserProfile(Map<String, dynamic> body, Function? callback) async {
+    bool success = false;
+    await httpPost(constant.baseURL + constant.profile, body).then((response) {
+      resolveStatusCode(response, callback);
+      if(response.statusCode == 200) success = true;
+    });
+    return success;
   }
 }

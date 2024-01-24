@@ -32,6 +32,8 @@ dependencies:
   provider: ^6.1.1
   firebase_core: ^2.24.2
   firebase_messaging: ^14.7.10
+  location: ^5.0.0
+  rxdart: ^0.27.7
 
 dev_dependencies:
   flutter_test:

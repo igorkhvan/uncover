@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:uncover/logic/models/user_model.dart';
+import 'package:provider/provider.dart';
+import 'package:uncover/logic/models/account_model.dart';
+import 'package:uncover/logic/providers/account_provider.dart';
 import 'package:uncover/logic/requests/account_request.dart';
+import 'package:uncover/logic/requests/users_request.dart';
 import 'package:uncover/logic/services/constants_service.dart' as constant;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -8,23 +11,15 @@ import '../services/shared_prefs_service.dart';
 
 class UsersProvider extends ChangeNotifier {
 
-  UserModel? _users;
+  AccountModel? _users;
   String? _errorMessage;
 
-  Future<void> register (String? firstName, String? lastName, String? phone) async {
-    AccountRequest request = AccountRequest();
-
-    Map<String, dynamic> body = {
-      constant.firstName: firstName ?? '',
-      constant.lastName: lastName ?? '',
-      constant.phone: phone ?? '',
-      constant.deviceToken: '1234567890'
-    };
-
-    request.register(body, setUsersFromHttp);
+  Future<void> getUsersFromServer (AccountModel account) async {
+    UsersRequest request = UsersRequest();
+    request.getUsers(account.authToken, _setUsersFromHttp);
   }
 
-  void setUsersFromHttp(http.Response response) {
+  void _setUsersFromHttp(http.Response response) {
     // UserModel user = UserModel.fromJson(jsonDecode(response.body)["user"]);
     users = jsonDecode(response.body)["authToken"];
   }
