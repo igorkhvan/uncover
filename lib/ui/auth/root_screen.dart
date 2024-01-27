@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uncover/logic/models/account_model.dart';
 import 'package:uncover/logic/providers/account_provider.dart';
 import 'package:uncover/logic/services/shared_prefs_service.dart';
-import 'package:uncover/ui/auth/auth_screen.dart';
+import 'package:uncover/ui/auth/login_screen.dart';
 import 'package:uncover/ui/auth/main_screen.dart';
 import 'package:uncover/ui/auth/register_screen.dart';
 

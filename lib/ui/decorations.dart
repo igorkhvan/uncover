@@ -36,15 +36,44 @@ const textFieldRoundedDecoration = InputDecoration(
 );
 
 const textFieldUnderlinedDecoration = InputDecoration(
+  focusedBorder: focusedInputBorder,
+  enabledBorder: enabledInputBorder,
   hintText: 'Enter a value',
-  contentPadding: EdgeInsets.symmetric(vertical: 10.0,),
+  contentPadding: EdgeInsets.symmetric(
+    vertical: 10.0,
+  ),
 );
 
-const containerDecoration = BoxDecoration(
-  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+const focusedInputBorder = UnderlineInputBorder(
+  //Outline border type for TextField
+  borderSide: BorderSide(
+    color: Colors.white,
+    width: 1,
+  ),
+);
+
+const enabledInputBorder = UnderlineInputBorder(
+  //Outline border type for TextField
+  borderSide: BorderSide(
+    color: Colors.grey,
+    width: 1,
+  ),
+);
+
+const mainBackgroundDecoration = BoxDecoration(
+  gradient: LinearGradient(
+    begin: Alignment.topRight,
+    end: Alignment.bottomLeft,
+    stops: [0.1, 0.3, 0.5, 0.9],
+    colors: [
+      Colors.black,
+      Color.fromRGBO(20, 6, 48, 1.0),
+      Color.fromRGBO(53, 15, 135, 1.0),
+      Colors.teal,
+    ],
+  ),
 );
 
 const double horizontalPadding = 20.0;
 
 const double verticalPadding = 0.0;
-

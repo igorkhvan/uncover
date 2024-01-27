@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uncover/logic/providers/account_provider.dart';
 import 'package:uncover/logic/providers/users_provider.dart';
+import 'package:uncover/ui/auth/login_screen.dart';
 import 'package:uncover/ui/auth/register_screen.dart';
 import 'package:uncover/ui/auth/root_screen.dart';
 import 'package:uncover/ui/theme_data.dart' as my_theme;
@@ -18,7 +19,7 @@ String? _fcmTokenSharedPrefs;
 final _messageStreamController = BehaviorSubject<RemoteMessage>();
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
 
   if (kDebugMode) {
     print("Handling a background message: ${message.messageId}");
@@ -116,7 +117,7 @@ class _UncoverState extends State<Uncover> {
     return MaterialApp(
       title: 'Uncover',
       theme: my_theme.myTheme,
-      home: const RootScreen(),
+      home: const LoginScreen(),
     );
   }
 }
