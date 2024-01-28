@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:uncover/logic/providers/account_provider.dart';
 import 'package:uncover/logic/providers/users_provider.dart';
 import 'package:uncover/logic/services/shared_prefs_service.dart';
-import 'package:uncover/ui/components/rounded_button.dart';
 import 'package:uncover/ui/components/side_drawer.dart';
+import 'package:location/location.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -18,6 +18,12 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   final SharedPrefs sharedPrefs = SharedPrefs();
 
+  Location? location = Location();
+
+  bool? _serviceEnabled;
+  PermissionStatus? _permissionGranted;
+  LocationData? _locationData;
+
   @override
   void initState() {
     super.initState();
@@ -27,18 +33,16 @@ class _MainScreenState extends State<MainScreen> {
 
       requestNotificationPermission();
 
+      requestLocationPermission();
+
       if (kDebugMode) {
         print(await SharedPrefs().getFirebaseToken());
       }
-
-
-
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Material(
       child: Scaffold(
         appBar: AppBar(
@@ -79,4 +83,43 @@ class _MainScreenState extends State<MainScreen> {
     }
   }
 
+  void requestLocationPermission() async {
+    _serviceEnabled = await location?.serviceEnabled();
+    if (!_serviceEnabled!) {
+      _serviceEnabled = await location?.requestService();
+      if (!_serviceEnabled!) {
+        return;
+      }
+    }
+
+    _permissionGranted = await location?.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location?.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+    _locationData = await location?.getLocation();
+
+    if (context.mounted) {
+      Provider.of<AccountProvider>(context, listen: false).lastLocation =
+          '${_locationData?.latitude?.toStringAsFixed(7) ?? ''};${_locationData?.longitude?.toStringAsFixed(7) ?? ''}';
+    }
+
+    if (kDebugMode) {
+      print(
+          '${_locationData?.latitude?.toStringAsFixed(7) ?? ''};${_locationData?.longitude?.toStringAsFixed(7) ?? ''}');
+    }
+
+    if (context.mounted) {
+      Provider.of<AccountProvider>(context, listen: false).updateProfile().then(
+        (value) {
+          if (kDebugMode) {
+            print(value ? 'success' : 'not success');
+          }
+        },
+      );
+    }
+  }
 }

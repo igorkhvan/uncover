@@ -79,8 +79,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
           ),
+
           SizedBox(height: _screenHeight * 0.12),
+
           const Text('Имя'),
+
           TextField(
             focusNode: _nameFocus,
             decoration: textFieldUnderlinedDecoration.copyWith(
@@ -99,7 +102,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             controller: _nameController,
           ),
           SizedBox(height: _screenHeight * 0.03),
+
           const Text('Фамилия'),
+
           TextField(
             focusNode: _surnameFocus,
             decoration: textFieldUnderlinedDecoration.copyWith(
@@ -118,7 +123,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             controller: _surnameController,
           ),
           SizedBox(height: _screenHeight * 0.03),
+
           const Text('Номер телефона'),
+
           TextField(
             focusNode: _phoneFocus,
             inputFormatters: [maskFormatter],
@@ -139,7 +146,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             },
             controller: _phoneController,
           ),
+
           SizedBox(height: _screenHeight * 0.05),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [

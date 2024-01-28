@@ -1,13 +1,14 @@
 import 'package:http/http.dart' as http;
 
 mixin httpRequestMixin {
-  Future<http.Response> httpPost(String? url, Map<String, dynamic>? body) {
+  Future<http.Response> httpPost(String? url, Map<String, dynamic>? body, {String? authToken}) {
     return http.post(
       Uri.parse(url ?? ''),
       body: body,
       headers: {
         // 'Content-Type': 'multipart/form-data',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${authToken ?? ''}'
       },
     );
   }

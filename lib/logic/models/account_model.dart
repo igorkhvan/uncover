@@ -13,6 +13,10 @@ class AccountModel {
   String? firebaseToken;
   final String? firstName;
   final String? lastName;
+  @JsonKey(includeFromJson: false)
+  String? lastLocation;
+  @JsonKey(includeFromJson: false)
+  String? interests;
 
   AccountModel({
     this.uuid,
@@ -22,6 +26,8 @@ class AccountModel {
     this.firebaseToken,
     this.firstName,
     this.lastName,
+    this.lastLocation,
+    this.interests
   });
 
   factory AccountModel.fromJson(Map<String, dynamic> json) =>

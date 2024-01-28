@@ -30,6 +30,16 @@ class AccountProvider extends ChangeNotifier {
     account = currentUser;
   }
 
+  Future<bool> updateProfile () async {
+    AccountRequest request = AccountRequest();
+
+    Map<String, dynamic> body = {
+      constant.lastLocation: _account?.lastLocation ?? '',
+      constant.interests: _account?.interests ?? '',
+    };
+    return request.updateUserProfile(body, _account);
+  }
+
   void setAccountFromSharedPrefs() async {
     _account = await SharedPrefs().getAccount();
     notifyListeners();
@@ -49,4 +59,11 @@ class AccountProvider extends ChangeNotifier {
   }
 
   get fcmToken => _account?.firebaseToken ?? 'fcm token is empty';
+
+  set lastLocation(location) {
+    _account?.lastLocation = location;
+    notifyListeners();
+  }
+
+  get lastLocation => _account?.lastLocation;
 }

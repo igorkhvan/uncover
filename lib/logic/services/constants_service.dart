@@ -14,3 +14,5 @@ const avatar = 'avatar';
 const phone = 'phone';
 const description = 'interestsDescription';
 const deviceToken = 'deviceToken';
+const lastLocation = 'lastLocation';
+const interests = 'interestsDescription';
