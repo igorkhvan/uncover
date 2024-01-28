@@ -141,8 +141,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
             },
             textInputAction: TextInputAction.done,
             onSubmitted: (value) {
-              _phone = value;
-              if (kDebugMode) print(maskFormatter.getUnmaskedText());
+              Provider.of<AccountProvider>(context, listen: false)
+                  .register(_name, _surname, '+7${maskFormatter.getUnmaskedText()}')
+                  .then((success) {
+                if (kDebugMode) print(success ? 'success' : 'not success');
+                if (success) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MainScreen()));
+                }
+              });
             },
             controller: _phoneController,
           ),
@@ -155,7 +164,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               RoundedButton(
                 onPressed: () {
                   Provider.of<AccountProvider>(context, listen: false)
-                      .register(_name, _surname, _phone)
+                      .register(_name, _surname, '+7${maskFormatter.getUnmaskedText()}')
                       .then((success) {
                     if (kDebugMode) print(success ? 'success' : 'not success');
                     if (success) {
