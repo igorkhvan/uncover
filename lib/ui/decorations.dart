@@ -42,6 +42,7 @@ const textFieldUnderlinedDecoration = InputDecoration(
   contentPadding: EdgeInsets.symmetric(
     vertical: 10.0,
   ),
+
 );
 
 const focusedInputBorder = UnderlineInputBorder(

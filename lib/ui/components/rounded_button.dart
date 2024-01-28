@@ -20,7 +20,7 @@ class RoundedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 30.0,
+      height: 35.0,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(

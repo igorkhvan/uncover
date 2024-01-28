@@ -117,7 +117,7 @@ class _UncoverState extends State<Uncover> {
     return MaterialApp(
       title: 'Uncover',
       theme: my_theme.myTheme,
-      home: const LoginScreen(),
+      home: const RegisterScreen(),
     );
   }
 }
