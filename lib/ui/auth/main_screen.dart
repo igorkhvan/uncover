@@ -5,8 +5,10 @@ import 'package:provider/provider.dart';
 import 'package:uncover/logic/providers/account_provider.dart';
 import 'package:uncover/logic/providers/users_provider.dart';
 import 'package:uncover/logic/services/shared_prefs_service.dart';
+import 'package:uncover/ui/components/friend_tile.dart';
 import 'package:uncover/ui/components/side_drawer.dart';
 import 'package:location/location.dart';
+import 'package:uncover/ui/decorations.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -32,7 +34,6 @@ class _MainScreenState extends State<MainScreen> {
           Provider.of<AccountProvider>(context, listen: false).account);
 
       requestNotificationPermission();
-
       requestLocationPermission();
 
       if (kDebugMode) {
@@ -43,18 +44,30 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'uncover',
-          ),
-//        actions: [],
-        ),
-        body: Container(),
-        drawer: SideDrawer(),
+    return Stack(children: [
+      Container(
+        decoration: mainBackgroundDecoration,
       ),
-    );
+      Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.black.withAlpha(50),
+          title: const Center(
+            child: Text(
+              'Люди рядом с вами',
+            ),
+          ),
+                 // actions: [],
+        ),
+        body: const Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            FriendTile(),
+          ],
+        ),
+        // drawer: SideDrawer(),
+      ),
+    ]);
   }
 
   void requestNotificationPermission() async {
@@ -70,18 +83,12 @@ class _MainScreenState extends State<MainScreen> {
       sound: true,
     );
 
-    // if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-    //   print('User granted permission');
-    // } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
-    //   print('User granted provisional permission');
-    // } else {
-    //   print('User declined or has not accepted permission');
-    // }
-
     if (kDebugMode) {
       print('Permission granted: ${settings.authorizationStatus}');
     }
   }
+
+
 
   void requestLocationPermission() async {
     _serviceEnabled = await location?.serviceEnabled();

@@ -42,17 +42,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
         Container(
           decoration: mainBackgroundDecoration,
         ),
-        GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child: SafeArea(
+        SafeArea(
+          child: GestureDetector(
+            onTap: () {
+              FocusScope.of(context).unfocus();
+            },
             child: Scaffold(
               resizeToAvoidBottomInset: false,
               backgroundColor: Colors.transparent,
-              body: SafeArea(
-                child: screenElements(),
-              ),
+              body: screenElements(),
             ),
           ),
         ),

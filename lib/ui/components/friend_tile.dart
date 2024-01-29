@@ -15,12 +15,14 @@ class FriendTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      trailing: const Icon(
-        Icons.keyboard_arrow_right,
-        color: Colors.black54,
-      ),
-      onLongPress: longPressCallback,
-      onTap: shortPressCallback,
+
+      tileColor: Colors.white.withAlpha(80),
+      // trailing: const Icon(
+      //   Icons.keyboard_arrow_right,
+      //   color: Colors.black54,
+      // ),
+      onLongPress: () {if (longPressCallback != null) longPressCallback;},
+      onTap: () {if (shortPressCallback != null) shortPressCallback;},
       title: Text(
         name ?? '',
       ),

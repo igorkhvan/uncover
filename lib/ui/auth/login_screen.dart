@@ -36,16 +36,16 @@ class _LoginScreenState extends State<LoginScreen> {
         Container(
           decoration: mainBackgroundDecoration,
         ),
-        GestureDetector(
-          onTap: () {
-            _phoneController.text = maskFormatter.getMaskedText() ?? '';
-            FocusScope.of(context).unfocus();
-          },
-          child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            backgroundColor: Colors.transparent,
-            body: SafeArea(
-              child: screenElements(),
+        SafeArea(
+          child: GestureDetector(
+            onTap: () {
+              _phoneController.text = maskFormatter.getMaskedText() ?? '';
+              FocusScope.of(context).unfocus();
+            },
+            child: Scaffold(
+              resizeToAvoidBottomInset: false,
+              backgroundColor: Colors.transparent,
+              body: screenElements(),
             ),
           ),
         ),
