@@ -1,24 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'account_model.dart';
+part of 'stranger_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-AccountModel _$AccountModelFromJson(Map<String, dynamic> json) => AccountModel(
+StrangerModel _$StrangerModelFromJson(Map<String, dynamic> json) =>
+    StrangerModel(
       uuid: json['uuid'] as String?,
-      phone: json['phone'] as String?,
       avatar: json['avatar'] as String?,
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
+      lastLocation: json['lastLocation'] as String?,
+      interestsDescription: json['interestsDescription'] as String?,
     );
 
-Map<String, dynamic> _$AccountModelToJson(AccountModel instance) =>
+Map<String, dynamic> _$StrangerModelToJson(StrangerModel instance) =>
     <String, dynamic>{
       'uuid': instance.uuid,
-      'phone': instance.phone,
       'avatar': instance.avatar,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
+      'lastLocation': instance.lastLocation,
+      'interestsDescription': instance.interestsDescription,
     };

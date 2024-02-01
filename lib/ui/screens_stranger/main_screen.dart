@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uncover/logic/providers/account_provider.dart';
-import 'package:uncover/logic/providers/users_provider.dart';
+import 'package:uncover/logic/providers/stranger_provider.dart';
 import 'package:uncover/logic/services/shared_prefs_service.dart';
-import 'package:uncover/ui/components/friend_tile.dart';
+import 'package:uncover/ui/components/stranger_tile.dart';
 import 'package:uncover/ui/components/side_drawer.dart';
 import 'package:location/location.dart';
 import 'package:uncover/ui/decorations.dart';
@@ -30,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      Provider.of<UsersProvider>(context, listen: false).getUsersFromServer(
+      Provider.of<StrangerProvider>(context, listen: false).getStrangersFromServer(
           Provider.of<AccountProvider>(context, listen: false).account);
 
       requestNotificationPermission();
@@ -51,6 +51,7 @@ class _MainScreenState extends State<MainScreen> {
       Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
+          leading: const Icon(Icons.menu_sharp),
           backgroundColor: Colors.black.withAlpha(50),
           title: const Center(
             child: Text(
@@ -62,7 +63,7 @@ class _MainScreenState extends State<MainScreen> {
         body: const Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            FriendTile(),
+            StrangerTile(),
           ],
         ),
         // drawer: SideDrawer(),

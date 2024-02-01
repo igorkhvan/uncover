@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 import 'package:uncover/logic/providers/account_provider.dart';
-import 'package:uncover/ui/auth/main_screen.dart';
+import 'package:uncover/ui/screens_stranger/main_screen.dart';
 import 'package:uncover/ui/components/rounded_button.dart';
 import 'package:uncover/ui/decorations.dart';
 

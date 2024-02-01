@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class FriendTile extends StatelessWidget {
+class StrangerTile extends StatelessWidget {
   final String? name;
   final VoidCallback? longPressCallback;
   final VoidCallback? shortPressCallback;
 
-  const FriendTile({
+  const StrangerTile({
     super.key,
     this.name,
     this.longPressCallback,
@@ -15,8 +15,6 @@ class FriendTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-
-      tileColor: Colors.white.withAlpha(80),
       // trailing: const Icon(
       //   Icons.keyboard_arrow_right,
       //   color: Colors.black54,
@@ -26,10 +24,10 @@ class FriendTile extends StatelessWidget {
       title: Text(
         name ?? '',
       ),
-//      trailing: Icon(
-//        Icons.list,
-//        color: Colors.black54,
-//      ),
+    //      trailing: Icon(
+    //        Icons.list,
+    //        color: Colors.black54,
+    //      ),
     );
   }
 }
