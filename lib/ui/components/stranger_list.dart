@@ -3,23 +3,23 @@ import 'package:provider/provider.dart';
 import 'package:uncover/logic/providers/stranger_provider.dart';
 import 'package:uncover/ui/components/stranger_tile.dart';
 
-class UsersList extends StatefulWidget {
-  const UsersList(
+class StrangerList extends StatefulWidget {
+  const StrangerList(
       {super.key, this.onShortPressFunction, this.onLongPressFunction});
 
   final Function? onShortPressFunction;
   final Function? onLongPressFunction;
 
   @override
-  State<UsersList> createState() => _UsersListState();
+  State<StrangerList> createState() => _StrangerListState();
 }
 
-class _UsersListState extends State<UsersList> {
+class _StrangerListState extends State<StrangerList> {
   @override
   Widget build(BuildContext context) {
     return Consumer<StrangerProvider>(
       builder: (context, strangerData, _) {
-        return (strangerData.strangers != null)
+        return (strangerData.strangers != null) && (strangerData.count != 0)
             ? ListView.builder(
                 itemBuilder: (context, index) {
                   final friend = strangerData.strangers[index];
@@ -48,7 +48,7 @@ class _UsersListState extends State<UsersList> {
                   SizedBox(
                     width: 5,
                   ),
-                  Text('Users not found.'),
+                  Text('Пользователи не найдены.'),
                 ],
               );
       },

@@ -15,9 +15,9 @@ class StrangerProvider extends ChangeNotifier {
   List<StrangerModel>? _strangers;
   String? _errorMessage;
 
-  Future<void> getStrangersFromServer (AccountModel account) async {
+  Future<bool> getStrangersFromServer (AccountModel account) async {
     StrangerRequest request = StrangerRequest();
-    request.getStrangers(account.authToken, _setStrangersFromHttp);
+    return request.getStrangers(account.authToken, _setStrangersFromHttp);
   }
 
   void _setStrangersFromHttp(http.Response response) {

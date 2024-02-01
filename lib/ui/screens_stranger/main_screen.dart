@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:uncover/logic/providers/account_provider.dart';
 import 'package:uncover/logic/providers/stranger_provider.dart';
 import 'package:uncover/logic/services/shared_prefs_service.dart';
+import 'package:uncover/ui/components/stranger_list.dart';
 import 'package:uncover/ui/components/stranger_tile.dart';
 import 'package:uncover/ui/components/side_drawer.dart';
 import 'package:location/location.dart';
@@ -30,8 +31,14 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      Provider.of<StrangerProvider>(context, listen: false).getStrangersFromServer(
-          Provider.of<AccountProvider>(context, listen: false).account);
+      await Provider.of<StrangerProvider>(context, listen: false)
+          .getStrangersFromServer(
+              Provider.of<AccountProvider>(context, listen: false).account)
+          .then(
+            (value) => {
+              if (kDebugMode) {print(value ? 'success' : 'not success')}
+            },
+          );
 
       requestNotificationPermission();
       requestLocationPermission();
@@ -58,12 +65,14 @@ class _MainScreenState extends State<MainScreen> {
               'Люди рядом с вами',
             ),
           ),
-                 // actions: [],
+          // actions: [],
         ),
         body: const Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            StrangerTile(),
+            Expanded(
+              child: StrangerList(),
+            ),
           ],
         ),
         // drawer: SideDrawer(),
@@ -88,8 +97,6 @@ class _MainScreenState extends State<MainScreen> {
       print('Permission granted: ${settings.authorizationStatus}');
     }
   }
-
-
 
   void requestLocationPermission() async {
     _serviceEnabled = await location?.serviceEnabled();
