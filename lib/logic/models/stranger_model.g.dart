@@ -12,7 +12,10 @@ StrangerModel _$StrangerModelFromJson(Map<String, dynamic> json) =>
       avatar: json['avatar'] as String?,
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
-      lastLocation: json['lastLocation'] as String?,
+      lastLocation: json['lastLocation'] == null
+          ? null
+          : LocationModel.fromJson(
+              json['lastLocation'] as Map<String, dynamic>),
       interestsDescription: json['interestsDescription'] as String?,
     );
 

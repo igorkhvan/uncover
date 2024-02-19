@@ -55,27 +55,41 @@ class _MainScreenState extends State<MainScreen> {
       Container(
         decoration: mainBackgroundDecoration,
       ),
-      Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          leading: const Icon(Icons.menu_sharp),
-          backgroundColor: Colors.black.withAlpha(50),
-          title: const Center(
-            child: Text(
-              'Люди рядом с вами',
+      const SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(height: 10.0,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(
+                      Icons.menu_outlined,
+                    ),
+                    Text(
+                      'Люди рядом с тобой',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    Icon(
+                      Icons.settings,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.0,),
+                Expanded(
+                  child: StrangerList(),
+                ),
+              ],
             ),
           ),
-          // actions: [],
+          // drawer: SideDrawer(),
         ),
-        body: const Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: StrangerList(),
-            ),
-          ],
-        ),
-        // drawer: SideDrawer(),
       ),
     ]);
   }

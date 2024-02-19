@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:uncover/logic/models/location_model.dart';
 
 part 'stranger_model.g.dart';
 
@@ -8,7 +9,7 @@ class StrangerModel {
   final String? avatar;
   final String? firstName;
   final String? lastName;
-  final String? lastLocation;
+  final LocationModel? lastLocation;
   final String? interestsDescription;
 
   StrangerModel({

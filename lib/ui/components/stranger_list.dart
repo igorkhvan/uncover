@@ -22,20 +22,17 @@ class _StrangerListState extends State<StrangerList> {
         return (strangerData.strangers != null) && (strangerData.count != 0)
             ? ListView.builder(
                 itemBuilder: (context, index) {
-                  final friend = strangerData.strangers[index];
-                  return Card(
-                    color: Colors.white.withAlpha(80),
-                    child: StrangerTile(
-                      name: friend.name,
-                      shortPressCallback: () {
-                        // Provider.of<StrangerProvider>(context).setSelectedFriend(friend);
-                        widget.onShortPressFunction;
-                      },
-                      longPressCallback: () {
-                        // Provider.of<StrangerProvider>(context).setSelectedFriend(friend);
-                        widget.onLongPressFunction;
-                      },
-                    ),
+                  final stranger = strangerData.strangers[index];
+                  return StrangerTile(
+                    stranger: stranger,
+                    shortPressCallback: () {
+                      // Provider.of<StrangerProvider>(context).setSelectedFriend(friend);
+                      widget.onShortPressFunction;
+                    },
+                    longPressCallback: () {
+                      // Provider.of<StrangerProvider>(context).setSelectedFriend(friend);
+                      widget.onLongPressFunction;
+                    },
                   );
                 },
                 itemCount: strangerData.count,
