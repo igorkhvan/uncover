@@ -31,6 +31,7 @@ class StrangerTile extends StatelessWidget {
                 width: double.infinity,
                 height: 70.0,
                 child: Card(
+                  color: Colors.white.withAlpha(20),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(35.0)),
                   child: Row(
@@ -38,8 +39,20 @@ class StrangerTile extends StatelessWidget {
                       const SizedBox(
                         width: 100.0,
                       ),
-                      Text(
-                        stranger!.firstName ?? '',
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            '${stranger!.firstName ?? ''} ${stranger!.lastName ?? ''}',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            stranger!.interestsDescription ?? '',
+                          ),
+                        ],
                       ),
                     ],
                   ),

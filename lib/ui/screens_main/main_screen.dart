@@ -6,8 +6,6 @@ import 'package:uncover/logic/providers/account_provider.dart';
 import 'package:uncover/logic/providers/stranger_provider.dart';
 import 'package:uncover/logic/services/shared_prefs_service.dart';
 import 'package:uncover/ui/components/stranger_list.dart';
-import 'package:uncover/ui/components/stranger_tile.dart';
-import 'package:uncover/ui/components/side_drawer.dart';
 import 'package:location/location.dart';
 import 'package:uncover/ui/decorations.dart';
 
@@ -67,17 +65,24 @@ class _MainScreenState extends State<MainScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(
-                      Icons.menu_outlined,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Icon(
+                        Icons.menu_outlined,
+                      ),
                     ),
                     Text(
                       'Люди рядом с тобой',
                       style: TextStyle(
-                        fontSize: 20.0,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Icon(
-                      Icons.settings,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Icon(
+                        Icons.settings,
+                      ),
                     ),
                   ],
                 ),

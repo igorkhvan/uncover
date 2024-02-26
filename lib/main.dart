@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uncover/logic/providers/account_provider.dart';
 import 'package:uncover/logic/providers/stranger_provider.dart';
+import 'package:uncover/ui/screens_auth/code_confirmation_screen.dart';
 import 'package:uncover/ui/screens_auth/login_screen.dart';
 import 'package:uncover/ui/screens_auth/register_screen.dart';
 import 'package:uncover/ui/screens_auth/root_screen.dart';
