@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
-import 'package:uncover/logic/utils/network_requests.dart';
+import 'package:uncover/logic/services/network_service.dart';
 
-class HttpRequests implements NetworkRequests{
+class HttpRequests implements NetworkService{
   @override
   Future<http.Response> post(String? url, Map<String, dynamic>? body, {String? authToken}) {
     return http.post(

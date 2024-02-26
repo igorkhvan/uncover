@@ -1,7 +1,7 @@
-import 'package:uncover/logic/utils/network_requests.dart';
+import 'package:uncover/logic/services/network_service.dart';
 
 class RequestManager {
-  final NetworkRequests request;
+  final NetworkService request;
   RequestManager(this.request);
 
   Future put(String? url, Map<String, dynamic>? body) {

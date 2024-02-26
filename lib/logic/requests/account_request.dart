@@ -1,7 +1,7 @@
 import 'package:uncover/logic/models/account_model.dart';
-import 'package:uncover/logic/utils/http_requests.dart';
-import 'package:uncover/logic/utils/request_manager.dart';
-import 'package:uncover/logic/utils/request_mixin.dart';
+import 'package:uncover/logic/repositories/http_requests.dart';
+import 'package:uncover/logic/managers/request_manager.dart';
+import 'package:uncover/logic/mixins/request_mixin.dart';
 import 'package:uncover/logic/services/constants_service.dart' as constant;
 
 class AccountRequest with requestMixin {
