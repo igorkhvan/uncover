@@ -17,7 +17,7 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   String? _name;
   String? _surname;
-  // String? _phone;
+  String? _phone;
 
   late double _screenHeight;
   final _phoneController = TextEditingController();
