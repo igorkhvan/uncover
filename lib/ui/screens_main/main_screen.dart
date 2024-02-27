@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uncover/logic/providers/account_provider.dart';
 import 'package:uncover/logic/providers/stranger_provider.dart';
-import 'package:uncover/logic/services/shared_prefs_service.dart';
+import 'package:uncover/logic/repositories/shared_prefs.dart';
 import 'package:uncover/ui/components/glowing_avatar.dart';
 import 'package:uncover/ui/components/stranger_list.dart';
 import 'package:location/location.dart';

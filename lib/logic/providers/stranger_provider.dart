@@ -5,10 +5,10 @@ import 'package:uncover/logic/models/stranger_model.dart';
 import 'package:uncover/logic/providers/account_provider.dart';
 import 'package:uncover/logic/requests/account_request.dart';
 import 'package:uncover/logic/requests/stranger_request.dart';
-import 'package:uncover/logic/services/constants_service.dart' as constant;
+import 'package:uncover/logic/services/constants.dart' as constant;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../services/shared_prefs_service.dart';
+import '../repositories/shared_prefs.dart';
 
 class StrangerProvider extends ChangeNotifier {
 

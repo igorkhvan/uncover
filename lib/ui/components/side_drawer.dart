@@ -1,4 +1,4 @@
-import 'package:uncover/logic/services/shared_prefs_service.dart';
+import 'package:uncover/logic/repositories/shared_prefs.dart';
 import 'package:flutter/material.dart';
 
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uncover/logic/models/account_model.dart';
 import 'package:uncover/logic/providers/account_provider.dart';
-import 'package:uncover/logic/services/shared_prefs_service.dart';
+import 'package:uncover/logic/repositories/shared_prefs.dart';
 import 'package:uncover/ui/screens_main//main_screen.dart';
 import 'package:uncover/ui/screens_auth/register_screen.dart';
 

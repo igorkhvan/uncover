@@ -8,7 +8,7 @@ import 'package:uncover/ui/theme_data.dart' as my_theme;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'firebase_options.dart';
-import 'logic/services/shared_prefs_service.dart';
+import 'logic/repositories/shared_prefs.dart';
 import 'package:rxdart/rxdart.dart';
 
 String? _fcmToken;

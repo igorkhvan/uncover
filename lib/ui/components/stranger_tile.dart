@@ -89,7 +89,7 @@ class StrangerTile extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 elevation: 5,
                 child: Image.asset(
-                  'assets/emoji/Angry 01.png',
+                  'assets/emoji/mood-00005.png',
                   width: 25.0,
                   height: 25.0,
                   fit: BoxFit.cover,
