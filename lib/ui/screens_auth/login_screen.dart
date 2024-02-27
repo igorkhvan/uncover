@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
           body: SafeArea(
             child: GestureDetector(
               onTap: () {
-                _phoneController.text = maskFormatter.getMaskedText() ?? '';
+                _phoneController.text = maskFormatter.getMaskedText();
                 FocusScope.of(context).unfocus();
               },
               child: screenElements(),
