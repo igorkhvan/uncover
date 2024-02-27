@@ -113,6 +113,7 @@ class _UncoverState extends State<Uncover> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Uncover',
       theme: my_theme.myTheme,
       home: const RootScreen(),

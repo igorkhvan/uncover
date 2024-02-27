@@ -42,15 +42,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
         Container(
           decoration: mainBackgroundDecoration,
         ),
-        SafeArea(
-          child: GestureDetector(
-            onTap: () {
-              FocusScope.of(context).unfocus();
-            },
-            child: Scaffold(
-              resizeToAvoidBottomInset: false,
-              backgroundColor: Colors.transparent,
-              body: screenElements(),
+        Scaffold(
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.transparent,
+          body: SafeArea(
+            child: GestureDetector(
+              onTap: () {
+                FocusScope.of(context).unfocus();
+              },
+              child: screenElements(),
             ),
           ),
         ),
@@ -77,11 +77,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
           ),
-
           SizedBox(height: _screenHeight * 0.12),
-
           const Text('Имя'),
-
           TextField(
             focusNode: _nameFocus,
             decoration: textFieldUnderlinedDecoration.copyWith(
@@ -100,9 +97,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             controller: _nameController,
           ),
           SizedBox(height: _screenHeight * 0.03),
-
           const Text('Фамилия'),
-
           TextField(
             focusNode: _surnameFocus,
             decoration: textFieldUnderlinedDecoration.copyWith(
@@ -121,9 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             controller: _surnameController,
           ),
           SizedBox(height: _screenHeight * 0.03),
-
           const Text('Номер телефона'),
-
           TextField(
             focusNode: _phoneFocus,
             inputFormatters: [maskFormatter],
@@ -140,7 +133,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             textInputAction: TextInputAction.done,
             onSubmitted: (value) {
               Provider.of<AccountProvider>(context, listen: false)
-                  .register(_name, _surname, '+7${maskFormatter.getUnmaskedText()}')
+                  .register(
+                      _name, _surname, '+7${maskFormatter.getUnmaskedText()}')
                   .then((success) {
                 if (kDebugMode) print(success ? 'success' : 'not success');
                 if (success) {
@@ -153,16 +147,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
             },
             controller: _phoneController,
           ),
-
           SizedBox(height: _screenHeight * 0.05),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               RoundedButton(
                 onPressed: () {
                   Provider.of<AccountProvider>(context, listen: false)
-                      .register(_name, _surname, '+7${maskFormatter.getUnmaskedText()}')
+                      .register(_name, _surname,
+                          '+7${maskFormatter.getUnmaskedText()}')
                       .then((success) {
                     if (kDebugMode) print(success ? 'success' : 'not success');
                     if (success) {

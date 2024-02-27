@@ -27,34 +27,46 @@ class StrangerTile extends StatelessWidget {
         child: Stack(
           children: [
             Center(
-              child: SizedBox(
-                width: double.infinity,
-                height: 70.0,
-                child: Card(
-                  color: Colors.white.withAlpha(20),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(35.0)),
-                  child: Row(
-                    children: [
-                      const SizedBox(
-                        width: 100.0,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            '${stranger!.firstName ?? ''} ${stranger!.lastName ?? ''}',
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 70.0,
+                  child: Card(
+                    elevation: 0.0,
+                    color: Colors.white.withAlpha(120),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(35.0)),
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 80.0,
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                '${stranger!.firstName ?? ''} ${stranger!.lastName ?? ''}',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
+                              ),
+                              Text(
+                                stranger!.interestsDescription ?? '',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(color: Colors.black),
+                              ),
+                            ],
                           ),
-                          Text(
-                            stranger!.interestsDescription ?? '',
-                          ),
-                        ],
-                      ),
-                    ],
+                        ),
+                        const SizedBox(
+                          width: 20.0,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

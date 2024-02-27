@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:uncover/logic/providers/account_provider.dart';
 import 'package:uncover/logic/providers/stranger_provider.dart';
 import 'package:uncover/logic/services/shared_prefs_service.dart';
+import 'package:uncover/ui/components/glowing_avatar.dart';
 import 'package:uncover/ui/components/stranger_list.dart';
 import 'package:location/location.dart';
-import 'package:uncover/ui/decorations.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -50,51 +50,129 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
-      Container(
-        decoration: mainBackgroundDecoration,
+      SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Image.asset(
+          'assets/backgrounds/1.jpg',
+          fit: BoxFit.cover,
+        ),
       ),
-      const SafeArea(
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
+      Scaffold(
+        bottomNavigationBar: Theme(
+          data: ThemeData(
+            navigationBarTheme: NavigationBarThemeData(
+              labelTextStyle: MaterialStateProperty.resolveWith(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  return const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  );
+                }
+                return const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.black,
+                );
+              }),
+              // iconTheme: MaterialStateProperty.all(
+              //   const IconThemeData(color: Colors.blueGrey),
+              // ),
+            ),
+          ),
+          child: NavigationBar(
+            onDestinationSelected: (int index) {
+              setState(() {
+                // currentPageIndex = index;
+              });
+            },
+            indicatorColor: Colors.amber,
+            backgroundColor: Colors.white.withAlpha(100),
+            // selectedIndex: currentPageIndex,
+            destinations: const <Widget>[
+              NavigationDestination(
+                selectedIcon: Icon(Icons.home),
+                icon: Icon(
+                  Icons.home_outlined,
+                  color: Colors.indigo,
+                ),
+                label: 'Home',
+              ),
+              NavigationDestination(
+                icon: Badge(
+                  label: Text('2'),
+                  child: Icon(
+                    Icons.notifications_sharp,
+                    color: Colors.indigo,
+                  ),
+                ),
+                label: 'Notifications',
+              ),
+              NavigationDestination(
+                icon: Badge(
+                  label: Text('2'),
+                  child: Icon(
+                    Icons.messenger_sharp,
+                    color: Colors.indigo,
+                  ),
+                ),
+                label: 'Messages',
+              ),
+            ],
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(height: 10.0,),
+                const SizedBox(
+                  height: 10.0,
+                ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Icon(
-                        Icons.menu_outlined,
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Image.asset(
+                        'assets/icons/pin-point.png',
+                        width: 30.0,
+                        height: 30.0,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    Text(
+                    const Text(
                       'Люди рядом с тобой',
                       style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
+                        color: Colors.black,
                       ),
                     ),
-                    Padding(
+                    const Expanded(
+                      child: SizedBox(),
+                    ),
+                    const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Icon(
-                        Icons.settings,
-                      ),
+                      child: GlowingAvatar(),
                     ),
                   ],
                 ),
-                SizedBox(height: 20.0,),
-                Expanded(
+                const SizedBox(
+                  height: 20.0,
+                ),
+                const Expanded(
                   child: StrangerList(),
                 ),
               ],
             ),
           ),
-          // drawer: SideDrawer(),
         ),
+        // drawer: SideDrawer(),
       ),
     ]);
   }

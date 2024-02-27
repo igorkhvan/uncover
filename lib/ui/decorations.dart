@@ -75,6 +75,20 @@ const mainBackgroundDecoration = BoxDecoration(
   ),
 );
 
+const secondBackgroundDecoration = BoxDecoration(
+  gradient: LinearGradient(
+    begin: Alignment.topRight,
+    end: Alignment.bottomLeft,
+    stops: [0.1, 0.3, 0.5, 0.9],
+    colors: [
+      Colors.black,
+      Color.fromRGBO(20, 6, 48, 1.0),
+      Color.fromRGBO(53, 15, 135, 1.0),
+      Colors.teal,
+    ],
+  ),
+);
+
 const double horizontalPadding = 20.0;
 
 const double verticalPadding = 0.0;
