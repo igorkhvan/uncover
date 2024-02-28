@@ -8,7 +8,9 @@ class StrangerList extends StatefulWidget {
   final Function? onLongPressFunction;
 
   const StrangerList(
-      {super.key, required this.onShortPressFunction, this.onLongPressFunction});
+      {super.key,
+      required this.onShortPressFunction,
+      this.onLongPressFunction});
 
   @override
   State<StrangerList> createState() => _StrangerListState();
@@ -25,9 +27,14 @@ class _StrangerListState extends State<StrangerList> {
                   final stranger = strangerData.strangers[index];
                   return StrangerTile(
                     stranger: stranger,
-                    // shortPressCallback: widget.onShortPressFunction,
-                    shortPressCallback: widget.onShortPressFunction,
-                    longPressCallback: widget.onLongPressFunction,
+                    shortPressCallback: () {
+                      Provider.of<StrangerProvider>(context, listen: false)
+                          .stranger = stranger;
+                      widget.onShortPressFunction!();
+                    },
+                    longPressCallback: () {
+                      widget.onLongPressFunction!();
+                    },
                   );
                 },
                 itemCount: strangerData.count,

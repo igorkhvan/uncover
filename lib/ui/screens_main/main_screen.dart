@@ -1,6 +1,9 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:uncover/logic/models/stranger_model.dart';
 import 'package:uncover/logic/providers/account_provider.dart';
@@ -238,23 +241,56 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _showModalBottomSheet(BuildContext context) {
-  //   showModalBottomSheet(
-  //     context: context,
-  //     isScrollControlled: true, // Это позволяет BottomSheet растянуться на весь экран
-  //     builder: (BuildContext context) => FractionallySizedBox(
-  //       heightFactor: 0.9, // Растягиваем на весь экран
-  //       child: Card(
-  //         shape: const CircleBorder(),
-  //         clipBehavior: Clip.antiAlias,
-  //         elevation: 5,
-  //         child: Image.network(
-  //           stranger!.avatar!,
-  //           width: 80.0,
-  //           height: 80.0,
-  //           fit: BoxFit.cover,
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
+    StrangerModel selectedStranger =
+        Provider.of<StrangerProvider>(context, listen: false).stranger;
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) => FractionallySizedBox(
+        heightFactor: 0.9,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20.0),
+                    topRight: Radius.circular(20.0),
+                    bottomLeft: Radius.circular(0.0),
+                    bottomRight: Radius.circular(0.0),
+                  ),
+                  color: Colors.blueGrey),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ClipOval(
+                      child: Image.network(
+                        selectedStranger.avatar!,
+                        width: 120.0,
+                        height: 120.0,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 20.0,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(selectedStranger.firstName!, style: const TextStyle(fontSize: 20.0),),
+                        Text(selectedStranger.lastName!, style: const TextStyle(fontSize: 20.0),),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
