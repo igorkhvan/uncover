@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:uncover/logic/models/stranger_model.dart';
 import 'package:uncover/logic/providers/account_provider.dart';
 import 'package:uncover/logic/providers/stranger_provider.dart';
 import 'package:uncover/logic/repositories/shared_prefs.dart';
@@ -38,8 +39,8 @@ class _MainScreenState extends State<MainScreen> {
             },
           );
 
-      requestNotificationPermission();
-      requestLocationPermission();
+      _requestNotificationPermission();
+      _requestLocationPermission();
 
       if (kDebugMode) {
         print(await SharedPrefs().getFirebaseToken());
@@ -165,19 +166,20 @@ class _MainScreenState extends State<MainScreen> {
                 const SizedBox(
                   height: 20.0,
                 ),
-                const Expanded(
-                  child: StrangerList(),
+                Expanded(
+                  child: StrangerList(
+                    onShortPressFunction: () => _showModalBottomSheet(context),
+                  ),
                 ),
               ],
             ),
           ),
         ),
-        // drawer: SideDrawer(),
       ),
     ]);
   }
 
-  void requestNotificationPermission() async {
+  void _requestNotificationPermission() async {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
 
     NotificationSettings settings = await messaging.requestPermission(
@@ -195,7 +197,7 @@ class _MainScreenState extends State<MainScreen> {
     }
   }
 
-  void requestLocationPermission() async {
+  void _requestLocationPermission() async {
     _serviceEnabled = await location?.serviceEnabled();
     if (!_serviceEnabled!) {
       _serviceEnabled = await location?.requestService();
@@ -234,4 +236,25 @@ class _MainScreenState extends State<MainScreen> {
       );
     }
   }
+
+  void _showModalBottomSheet(BuildContext context) {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     isScrollControlled: true, // Это позволяет BottomSheet растянуться на весь экран
+  //     builder: (BuildContext context) => FractionallySizedBox(
+  //       heightFactor: 0.9, // Растягиваем на весь экран
+  //       child: Card(
+  //         shape: const CircleBorder(),
+  //         clipBehavior: Clip.antiAlias,
+  //         elevation: 5,
+  //         child: Image.network(
+  //           stranger!.avatar!,
+  //           width: 80.0,
+  //           height: 80.0,
+  //           fit: BoxFit.cover,
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }
