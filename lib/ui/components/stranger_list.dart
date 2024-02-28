@@ -4,11 +4,11 @@ import 'package:uncover/logic/providers/stranger_provider.dart';
 import 'package:uncover/ui/components/stranger_tile.dart';
 
 class StrangerList extends StatefulWidget {
-  const StrangerList(
-      {super.key, this.onShortPressFunction, this.onLongPressFunction});
-
   final Function? onShortPressFunction;
   final Function? onLongPressFunction;
+
+  const StrangerList(
+      {super.key, required this.onShortPressFunction, this.onLongPressFunction});
 
   @override
   State<StrangerList> createState() => _StrangerListState();
@@ -25,14 +25,9 @@ class _StrangerListState extends State<StrangerList> {
                   final stranger = strangerData.strangers[index];
                   return StrangerTile(
                     stranger: stranger,
-                    shortPressCallback: () {
-                      // Provider.of<StrangerProvider>(context).setSelectedFriend(friend);
-                      widget.onShortPressFunction;
-                    },
-                    longPressCallback: () {
-                      // Provider.of<StrangerProvider>(context).setSelectedFriend(friend);
-                      widget.onLongPressFunction;
-                    },
+                    // shortPressCallback: widget.onShortPressFunction,
+                    shortPressCallback: widget.onShortPressFunction,
+                    longPressCallback: widget.onLongPressFunction,
                   );
                 },
                 itemCount: strangerData.count,

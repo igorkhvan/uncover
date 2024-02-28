@@ -3,24 +3,24 @@ import 'package:uncover/logic/models/stranger_model.dart';
 
 class StrangerTile extends StatelessWidget {
   final StrangerModel? stranger;
-  final VoidCallback? longPressCallback;
-  final VoidCallback? shortPressCallback;
+  final Function? longPressCallback;
+  final Function? shortPressCallback;
 
   const StrangerTile({
     super.key,
     this.stranger,
-    this.longPressCallback,
-    this.shortPressCallback,
+    required this.longPressCallback,
+    required this.shortPressCallback,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: () {
-        if (longPressCallback != null) longPressCallback;
+        if (longPressCallback != null) longPressCallback!();
       },
       onTap: () {
-        if (shortPressCallback != null) shortPressCallback;
+        if (shortPressCallback != null) shortPressCallback!();
       },
       child: SizedBox(
         height: 80.0,

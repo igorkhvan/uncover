@@ -1,39 +1,6 @@
 import 'package:http/http.dart' as http;
 
 mixin requestMixin {
-  // Future<http.Response> httpPost(String? url, Map<String, dynamic>? body, {String? authToken}) {
-  //   return http.post(
-  //     Uri.parse(url ?? ''),
-  //     body: body,
-  //     headers: {
-  //       // 'Content-Type': 'multipart/form-data',
-  //       'Accept': 'application/json',
-  //       'Authorization': 'Bearer ${authToken ?? ''}'
-  //     },
-  //   );
-  // }
-  //
-  // Future<http.Response> httpPut(String? url, Map<String, dynamic>? body) {
-  //   return http.put(
-  //     url as Uri,
-  //     body: body,
-  //     headers: {
-  //       'Content-Type': 'multipart/form-data',
-  //       'Accept': 'application/json'
-  //     },
-  //   );
-  // }
-  //
-  // Future<http.Response> httpGet(String? url, String? authToken) {
-  //   return http.get(
-  //     Uri.parse(url ?? ''),
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Authorization': 'Bearer ${authToken ?? ''}'
-  //     },
-  //   );
-  // }
-
   void resolveStatusCode(http.Response response, Function? callback) {
     switch (response.statusCode) {
       case 200:

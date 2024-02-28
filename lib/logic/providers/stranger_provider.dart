@@ -8,14 +8,15 @@ import 'dart:convert';
 class StrangerProvider extends ChangeNotifier {
 
   List<StrangerModel>? _strangers;
+  StrangerModel? _selectedStranger;
   String? _errorMessage;
 
   Future<bool> getStrangersFromServer (AccountModel account) async {
     StrangerRequest request = StrangerRequest();
-    return request.getStrangers(account.authToken, _setStrangersFromHttp);
+    return request.getStrangers(account.authToken, _setStrangersFromServer);
   }
 
-  void _setStrangersFromHttp(http.Response response) {
+  void _setStrangersFromServer(http.Response response) {
     var resultArray = jsonDecode(response.body)["users"] as List;
     strangers = resultArray.map((strangerJson) => StrangerModel.fromJson(strangerJson)).toList();
   }
@@ -28,4 +29,11 @@ class StrangerProvider extends ChangeNotifier {
   get strangers => _strangers;
 
   get count => _strangers != null ? _strangers?.length : 0;
+
+  set stranger(stranger) {
+    _selectedStranger = stranger;
+    notifyListeners();
+  }
+
+  get stranger => _selectedStranger;
 }

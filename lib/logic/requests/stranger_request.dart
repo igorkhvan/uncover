@@ -14,7 +14,7 @@ class StrangerRequest with requestMixin{
     //   if(response.statusCode == 200) success = true;
     //   resolveStatusCode(response, callback);
     // });
-    await requestManager.get('https://mocki.io/v1/5d283493-0870-4b78-91da-8f0c6da2e215', authToken).then((response) {
+    await requestManager.get('https://mocki.io/v1/2cb2b766-6add-450f-9c6c-76f729cbe237', authToken).then((response) {
       if(response.statusCode == 200) success = true;
       resolveStatusCode(response, callback);
     });

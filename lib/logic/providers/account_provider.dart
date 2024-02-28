@@ -21,10 +21,10 @@ class AccountProvider extends ChangeNotifier {
       constant.phone: phone ?? '',
       constant.deviceToken: await SharedPrefs().getFirebaseToken(),
     };
-    return request.register(body, setAccountFromHttp);
+    return request.register(body, _setAccountFromServer);
   }
 
-  void setAccountFromHttp(http.Response response) {
+  void _setAccountFromServer(http.Response response) {
     AccountModel currentUser = AccountModel.fromJson(jsonDecode(response.body)["user"]);
     currentUser.authToken = jsonDecode(response.body)["authToken"];
     account = currentUser;
