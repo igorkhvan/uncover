@@ -10,7 +10,13 @@ class StrangerModel {
   final String? firstName;
   final String? lastName;
   final LocationModel? lastLocation;
+  final List<String>? tags;
   final String? interestsDescription;
+  final int? connections;
+  final int? likes;
+  final int? thanks;
+  final String? mood;
+  final int? distance;
 
   StrangerModel({
     this.uuid,
@@ -18,7 +24,13 @@ class StrangerModel {
     this.firstName,
     this.lastName,
     this.lastLocation,
-    this.interestsDescription
+    this.tags,
+    this.interestsDescription,
+    this.connections,
+    this.likes,
+    this.thanks,
+    this.mood,
+    this.distance,
   });
 
   factory StrangerModel.fromJson(Map<String, dynamic> json) =>

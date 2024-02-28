@@ -49,15 +49,15 @@ class StrangerTile extends StatelessWidget {
                             children: [
                               Text(
                                 '${stranger!.firstName ?? ''} ${stranger!.lastName ?? ''}',
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.black),
+                                    color: Colors.black.withAlpha(180)),
                               ),
                               Text(
                                 stranger!.interestsDescription ?? '',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(color: Colors.black),
+                                style: TextStyle(color: Colors.black.withAlpha(180)),
                               ),
                             ],
                           ),
@@ -89,7 +89,7 @@ class StrangerTile extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 elevation: 5,
                 child: Image.asset(
-                  'assets/emoji/mood-00005.png',
+                  'assets/emoji/${stranger?.mood! ?? 'mood-00023'}.png',
                   width: 25.0,
                   height: 25.0,
                   fit: BoxFit.cover,

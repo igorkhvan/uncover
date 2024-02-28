@@ -16,7 +16,13 @@ StrangerModel _$StrangerModelFromJson(Map<String, dynamic> json) =>
           ? null
           : LocationModel.fromJson(
               json['lastLocation'] as Map<String, dynamic>),
+      tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList(),
       interestsDescription: json['interestsDescription'] as String?,
+      connections: json['connections'] as int?,
+      likes: json['likes'] as int?,
+      thanks: json['thanks'] as int?,
+      mood: json['mood'] as String?,
+      distance: json['distance'] as int?,
     );
 
 Map<String, dynamic> _$StrangerModelToJson(StrangerModel instance) =>
@@ -26,5 +32,11 @@ Map<String, dynamic> _$StrangerModelToJson(StrangerModel instance) =>
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'lastLocation': instance.lastLocation,
+      'tags': instance.tags,
       'interestsDescription': instance.interestsDescription,
+      'connections': instance.connections,
+      'likes': instance.likes,
+      'thanks': instance.thanks,
+      'mood': instance.mood,
+      'distance': instance.distance,
     };

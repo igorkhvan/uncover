@@ -1,9 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:uncover/logic/models/stranger_model.dart';
 import 'package:uncover/logic/providers/account_provider.dart';
@@ -12,6 +9,8 @@ import 'package:uncover/logic/repositories/shared_prefs.dart';
 import 'package:uncover/ui/components/glowing_avatar.dart';
 import 'package:uncover/ui/components/stranger_list.dart';
 import 'package:location/location.dart';
+
+import 'package:uncover/ui/components/tags_area.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -149,12 +148,12 @@ class _MainScreenState extends State<MainScreen> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const Text(
+                    Text(
                       'Люди рядом с тобой',
                       style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: Colors.black.withAlpha(180),
                       ),
                     ),
                     const Expanded(
@@ -261,7 +260,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   color: Colors.blueGrey),
               child: Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -278,14 +277,79 @@ class _MainScreenState extends State<MainScreen> {
                       width: 20.0,
                     ),
                     Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(selectedStranger.firstName!, style: const TextStyle(fontSize: 20.0),),
-                        Text(selectedStranger.lastName!, style: const TextStyle(fontSize: 20.0),),
+                        Text(
+                          '${selectedStranger.firstName!} ${selectedStranger.lastName!}',
+                          style: const TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 12.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Расстояние',
+                                  style: TextStyle(
+                                    fontSize: 10.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  '${selectedStranger.distance ?? 0} м',
+                                  style: const TextStyle(
+                                    fontSize: 16.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              width: 40.0,
+                            ),
+                            const Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Язык общения',
+                                  style: TextStyle(
+                                    fontSize: 10.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  'KZ, RU, EN',
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ],
                 ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TagsArea(
+                tags: selectedStranger.tags ?? ["Тэги не установлены"],
+                // tags: ['Flutter', 'Dart', 'Widget', 'Wrap', 'Chip', 'Example', 'Tags'],
               ),
             ),
           ],
