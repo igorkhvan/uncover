@@ -301,12 +301,12 @@ class _MainScreenState extends State<MainScreen> {
                                 const Text(
                                   'Расстояние',
                                   style: TextStyle(
-                                    fontSize: 10.0,
+                                    // fontSize: 10.0,
                                     color: Colors.white,
                                   ),
                                 ),
                                 Text(
-                                  '${selectedStranger.distance ?? 0} м',
+                                  '~${selectedStranger.distance ?? 0} м',
                                   style: const TextStyle(
                                     fontSize: 16.0,
                                     color: Colors.white,
@@ -324,7 +324,7 @@ class _MainScreenState extends State<MainScreen> {
                                 Text(
                                   'Язык общения',
                                   style: TextStyle(
-                                    fontSize: 10.0,
+                                    // fontSize: 10.0,
                                     color: Colors.white,
                                   ),
                                 ),
@@ -346,12 +346,47 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TagsArea(
-                tags: selectedStranger.tags ?? ["Тэги не установлены"],
-                // tags: ['Flutter', 'Dart', 'Widget', 'Wrap', 'Chip', 'Example', 'Tags'],
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Text(
+                    'Основные интересы',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8.0,),
+                  TagsArea(
+                    tags: selectedStranger.tags ?? ["Тэги не установлены"],
+                    // tags: ['Flutter', 'Dart', 'Widget', 'Wrap', 'Chip', 'Example', 'Tags'],
+                  ),
+                  const SizedBox(height: 20.0,),
+                  const Text(
+                    'Обо мне:',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8.0,),
+                  Text(
+                    selectedStranger.interestsDescription ?? '',
+                  ),
+                  const SizedBox(height: 20.0,),
+                  const Text(
+                    'Ближайшие события:',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8.0,),
+                  const Text(
+                    '20.03.2024 - Выставка спортивных товаров',
+                  ),
+                ],
               ),
-            ),
+            )
           ],
         ),
       ),
