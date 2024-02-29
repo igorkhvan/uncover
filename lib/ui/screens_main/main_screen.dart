@@ -1,4 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +12,8 @@ import 'package:uncover/ui/components/stranger_list.dart';
 import 'package:location/location.dart';
 
 import 'package:uncover/ui/components/tags_area.dart';
+
+import 'package:uncover/ui/decorations.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -247,146 +250,180 @@ class _MainScreenState extends State<MainScreen> {
       isScrollControlled: true,
       builder: (BuildContext context) => FractionallySizedBox(
         heightFactor: 0.9,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Stack(
           children: [
             Container(
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20.0),
-                    topRight: Radius.circular(20.0),
-                    bottomLeft: Radius.circular(0.0),
-                    bottomRight: Radius.circular(0.0),
-                  ),
-                  color: Colors.blueGrey),
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    ClipOval(
-                      child: Image.network(
-                        selectedStranger.avatar!,
-                        width: 120.0,
-                        height: 120.0,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 20.0,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '${selectedStranger.firstName!} ${selectedStranger.lastName!}',
-                          style: const TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 12.0,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Расстояние',
-                                  style: TextStyle(
-                                    // fontSize: 10.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Text(
-                                  '~${selectedStranger.distance ?? 0} м',
-                                  style: const TextStyle(
-                                    fontSize: 16.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 40.0,
-                            ),
-                            const Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Язык общения',
-                                  style: TextStyle(
-                                    // fontSize: 10.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Text(
-                                  'KZ, RU, EN',
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
+              decoration: mainBackgroundDecoration.copyWith(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20.0),
+                  topRight: Radius.circular(20.0),
+                  bottomLeft: Radius.circular(0.0),
+                  bottomRight: Radius.circular(0.0),
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Text(
-                    'Основные интересы',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ClipOval(
+                        child: Image.network(
+                          selectedStranger.avatar!,
+                          width: 120.0,
+                          height: 120.0,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 20.0,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${selectedStranger.firstName!} ${selectedStranger.lastName!}',
+                            style: const TextStyle(
+                              fontSize: 20.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 12.0,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    'Расстояние',
+                                    style: TextStyle(
+                                      // fontSize: 10.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    '~${selectedStranger.distance ?? 0} м',
+                                    style: const TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                width: 20.0,
+                              ),
+                              const Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Язык общения',
+                                    style: TextStyle(
+                                      // fontSize: 10.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    'KZ, RU, EN',
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(Radius.circular(10.0),),
+                        color: Colors.white.withAlpha(190),
+                      ),
+                      child: ListView(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20.0, vertical: 10.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                const Text(
+                                  'Основные интересы:',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 8.0,
+                                ),
+                                TagsArea(
+                                  tags: selectedStranger.tags ??
+                                      ["Тэги не установлены"],
+                                  // tags: ['Flutter', 'Dart', 'Widget', 'Wrap', 'Chip', 'Example', 'Tags'],
+                                ),
+                                const SizedBox(
+                                  height: 20.0,
+                                ),
+                                const Text(
+                                  'Обо мне:',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 8.0,
+                                ),
+                                Text(
+                                  selectedStranger.interestsDescription ?? '',
+                                ),
+                                const SizedBox(
+                                  height: 20.0,
+                                ),
+                                const Text(
+                                  'Ближайшие события:',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 8.0,
+                                ),
+                                const Text(
+                                  '20.03.2024 - Выставка спортивных товаров',
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 8.0,),
-                  TagsArea(
-                    tags: selectedStranger.tags ?? ["Тэги не установлены"],
-                    // tags: ['Flutter', 'Dart', 'Widget', 'Wrap', 'Chip', 'Example', 'Tags'],
-                  ),
-                  const SizedBox(height: 20.0,),
-                  const Text(
-                    'Обо мне:',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8.0,),
-                  Text(
-                    selectedStranger.interestsDescription ?? '',
-                  ),
-                  const SizedBox(height: 20.0,),
-                  const Text(
-                    'Ближайшие события:',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8.0,),
-                  const Text(
-                    '20.03.2024 - Выставка спортивных товаров',
-                  ),
-                ],
-              ),
-            )
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.12,),
+              ],
+            ),
           ],
         ),
       ),
