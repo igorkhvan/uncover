@@ -11,6 +11,12 @@ import 'firebase_options.dart';
 import 'logic/repositories/shared_prefs.dart';
 import 'package:rxdart/rxdart.dart';
 
+import 'logic/services/firebase_api.dart';
+import 'ui/notification_screens/notification_screen.dart';
+
+//! типа навигации на экран Push уведомления
+final navigatorKey = GlobalKey<NavigatorState>();
+
 String? _fcmToken;
 String? _fcmTokenSharedPrefs;
 
@@ -28,13 +34,13 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 Future<void> main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  //!====
+  await FirebaseApi().initNotofication();
   runApp(
     MultiProvider(
       providers: [
@@ -51,8 +57,7 @@ Future<void> main() async {
     _fcmToken = await FirebaseMessaging.instance.getToken();
 
     if (_fcmToken != null) {
-
-      if(kDebugMode) {
+      if (kDebugMode) {
         print('fcmToken has obtained: $_fcmToken');
       }
 
@@ -76,7 +81,6 @@ Future<void> main() async {
 
     _messageStreamController.sink.add(message);
   });
-
 }
 
 class Uncover extends StatefulWidget {
@@ -116,7 +120,14 @@ class _UncoverState extends State<Uncover> {
       debugShowCheckedModeBanner: false,
       title: 'Uncover',
       theme: my_theme.myTheme,
-      home: const RootScreen(),
+//!=====
+      navigatorKey: navigatorKey,
+      routes: {
+        '/': (context) => const RootScreen(),
+        '/notification_screen': (context) => const NotificationScreen(),
+      },
+      initialRoute: '/',
+      //! home: const RootScreen(),
     );
   }
 }
