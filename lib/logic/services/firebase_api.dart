@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import '../../main.dart';
+import '../repositories/shared_prefs.dart';
 
 //! верхнеуровневая функция для фонового обрабочика сообщение
 Future<void> handleBackgroundMessadge(RemoteMessage message) async {
@@ -38,7 +39,14 @@ class FirebaseApi {
 
     //получение токена(идентификатор нашего устройства)
     final fCMToken = await _firebaseMessaging.getToken();
-    print('Token ${(fCMToken)}'); // сейчас печатаем, потом н. сохранить
+    print('Token ${(fCMToken)}'); // сейчас печатаем, 
+ 
+   // сохраняем токен в SharedPrefs()
+ final fcmTokenSharedPrefs = await SharedPrefs().getFirebaseToken();
+      if ((fcmTokenSharedPrefs ?? '') != fCMToken) {
+        await SharedPrefs().setFirebaseToken(fCMToken);
+      }
+
 
     initPushNotifications();
     initLocalNotification();

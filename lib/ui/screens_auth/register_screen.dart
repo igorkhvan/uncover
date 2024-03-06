@@ -7,6 +7,8 @@ import 'package:uncover/ui/screens_main//main_screen.dart';
 import 'package:uncover/ui/components/rounded_button.dart';
 import 'package:uncover/ui/decorations.dart';
 
+import '../../logic/x_navigations/main_navigations.dart';
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -138,10 +140,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   .then((success) {
                 if (kDebugMode) print(success ? 'success' : 'not success');
                 if (success) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const MainScreen()));
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => const MainScreen()));
+                  Navigator.of(context).pushNamed(MainNavigationRoutsName.mainScreen);
+
                 }
               });
             },

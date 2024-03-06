@@ -11,6 +11,7 @@ class NotificationScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Center(child: Text('Уведомления')),
+          actions: const [SizedBox(width: 70)],
         ),
         body: Center(
           child: Column(

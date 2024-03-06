@@ -7,12 +7,14 @@ import 'dart:convert';
 import '../repositories/shared_prefs.dart';
 
 class AccountProvider extends ChangeNotifier {
+  
 
   AccountModel? _account;
   final SharedPrefs _sharedPrefs = SharedPrefs();
   String? _errorMessage;
 
-  Future<bool> register (String? firstName, String? lastName, String? phone) async {
+  Future<bool> register(
+      String? firstName, String? lastName, String? phone) async {
     AccountRequest request = AccountRequest();
 
     Map<String, dynamic> body = {
@@ -25,12 +27,13 @@ class AccountProvider extends ChangeNotifier {
   }
 
   void _setAccountFromServer(http.Response response) {
-    AccountModel currentUser = AccountModel.fromJson(jsonDecode(response.body)["user"]);
+    AccountModel currentUser =
+        AccountModel.fromJson(jsonDecode(response.body)["user"]);
     currentUser.authToken = jsonDecode(response.body)["authToken"];
     account = currentUser;
   }
 
-  Future<bool> updateProfile () async {
+  Future<bool> updateProfile() async {
     AccountRequest request = AccountRequest();
 
     Map<String, dynamic> body = {
@@ -66,4 +69,21 @@ class AccountProvider extends ChangeNotifier {
   }
 
   get lastLocation => _account?.lastLocation;
+
+//! Изменение Дмитрия связи с прописаннием роутов
+//==============================================================================
+  //final _sessionDataProvider = SessionDataProvider();
+
+// передача авторизирован или нет для выбора загрузки в main для initialRoute(bool isAuth)
+  bool _isAuth = false;
+  bool get isAuth => _isAuth;
+
+// проверка получен юзер ID или нет
+  Future<void> isChekAuth() async {
+    final account = await _sharedPrefs.getAccount();
+    _isAuth = account.uuid != null;
+    notifyListeners();
+    print('account.uuid!!!!!!!!!! - ${account.uuid}');
+   
+  }
 }
