@@ -1,24 +1,18 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uncover/logic/providers/account_provider.dart';
 import 'package:uncover/logic/providers/stranger_provider.dart';
 import 'package:uncover/ui/theme_data.dart' as my_theme;
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'firebase_options.dart';
-import 'logic/repositories/shared_prefs.dart';
-import 'package:rxdart/rxdart.dart';
+
 
 import 'logic/services/firebase_api.dart';
 import 'logic/x_navigations/main_navigations.dart';
 
-//! типа навигации на экран Push уведомления
-final navigatorKey = GlobalKey<NavigatorState>();
-
+//! перенесено в lib/logic/services/firebase_api.dart
 // String? _fcmToken;
 // String? _fcmTokenSharedPrefs;
-
 // final _messageStreamController = BehaviorSubject<RemoteMessage>();
 
 // Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -32,27 +26,14 @@ final navigatorKey = GlobalKey<NavigatorState>();
 //   }
 // }
 
+//! навигации на экран Push уведомления
+final navigatorKey = GlobalKey<NavigatorState>();
+
 Future<void> main() async {
-//
-
-
-
-
-
-
-//
   WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  //!==== изменения Дима========================================================
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseApi().initNotofication();
-  // проверка получен ли ID - Функция проверки аходится в AccountProvider()
-  // будет использована в initialRoute:
-  final model = AccountProvider();
-  await model.isChekAuth();
-  //----------------------------------------------------------------------------
+
   runApp(
     MultiProvider(
       providers: [
@@ -62,21 +43,17 @@ Future<void> main() async {
       child: const Uncover(),
     ),
   );
-
+ //! перенесено в lib/logic/services/firebase_api.dart
   // _fcmTokenSharedPrefs = await SharedPrefs().getFirebaseToken();
-
   // while (true) {
   //   _fcmToken = await FirebaseMessaging.instance.getToken();
-
   //   if (_fcmToken != null) {
   //     if (kDebugMode) {
   //       print('fcmToken has obtained: $_fcmToken');
   //     }
-
   //     if ((_fcmTokenSharedPrefs ?? '') != _fcmToken) {
   //       await SharedPrefs().setFirebaseToken(_fcmToken);
   //     }
-
   //     break;
   //   }
   // }
@@ -130,24 +107,17 @@ class Uncover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final read = context.read<AccountProvider>();
-//final read =Provider.of<AccountProvider>(context, listen: false)  - аналог
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Uncover',
-        theme: my_theme.myTheme,
+      debugShowCheckedModeBanner: false,
+      title: 'Uncover',
+      theme: my_theme.myTheme,
 //!=====
-        navigatorKey: navigatorKey,
-        routes: mainNavigation.routes,
-        initialRoute: mainNavigation.initialRoute(read.isAuth)
-        // - нужно будет потом onGenerateRoute: mainNavigation.onGenerateRoutes);
+      navigatorKey: navigatorKey,
+      routes: mainNavigation.routes,
+      initialRoute: mainNavigation.initialRoute,
+      //onGenerateRoute: mainNavigation.onGenerateRoutes
 
-        // routes: {
-        //   '/': (context) => const RootScreen(),
-        //   '/notification_screen': (context) => const NotificationScreen(),
-        // },
-        // initialRoute: '/',
-        //! home: const RootScreen(),
-        );
+      //! home: const RootScreen(),
+    );
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import '../../main.dart';
 import '../repositories/shared_prefs.dart';
+import '../x_navigations/main_navigations.dart';
 
 //! верхнеуровневая функция для фонового обрабочика сообщение
 Future<void> handleBackgroundMessadge(RemoteMessage message) async {
@@ -39,15 +40,13 @@ class FirebaseApi {
 
     //получение токена(идентификатор нашего устройства)
     final fCMToken = await _firebaseMessaging.getToken();
-    print('Token ${(fCMToken)}'); // сейчас печатаем, 
- 
-   // сохраняем токен в SharedPrefs()
- final fcmTokenSharedPrefs = await SharedPrefs().getFirebaseToken();
-      if ((fcmTokenSharedPrefs ?? '') != fCMToken) {
-        await SharedPrefs().setFirebaseToken(fCMToken);
-      }
+    print('Token ${(fCMToken)}'); // сейчас печатаем,
 
-
+    // сохраняем токен в SharedPrefs()(кстати, зачем намего хранить если он каждый раз приходит?)
+    final fcmTokenSharedPrefs = await SharedPrefs().getFirebaseToken();
+    if ((fcmTokenSharedPrefs ?? '') != fCMToken) {
+      await SharedPrefs().setFirebaseToken(fCMToken);
+    }
     initPushNotifications();
     initLocalNotification();
   }
@@ -57,8 +56,10 @@ class FirebaseApi {
   void handleMessage(RemoteMessage? message) {
     if (message == null) return;
 
-    navigatorKey.currentState
-        ?.pushNamed('/notification_screen', arguments: message);
+    //навигация
+    navigatorKey.currentState?.pushNamed(
+        MainNavigationRoutsName.notificationScreen,
+        arguments: message);
   }
 
 //------------------------------------------------------------------------------

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 import 'package:uncover/logic/providers/account_provider.dart';
-import 'package:uncover/ui/screens_main//main_screen.dart';
 import 'package:uncover/ui/components/rounded_button.dart';
 import 'package:uncover/ui/decorations.dart';
 
@@ -140,12 +139,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   .then((success) {
                 if (kDebugMode) print(success ? 'success' : 'not success');
                 if (success) {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => const MainScreen()));
-                  Navigator.of(context).pushNamed(MainNavigationRoutsName.mainScreen);
-
+                  Navigator.of(context)
+                      .pushNamed(MainNavigationRoutsName.mainScreen);
                 }
               });
             },
@@ -163,10 +158,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       .then((success) {
                     if (kDebugMode) print(success ? 'success' : 'not success');
                     if (success) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MainScreen()));
+                      Navigator.of(context)
+                          .pushNamed(MainNavigationRoutsName.mainScreen);
                     }
                   });
                 },

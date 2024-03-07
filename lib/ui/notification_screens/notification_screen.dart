@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
-  //static const route = '/notification_screen';
 
   @override
   Widget build(BuildContext context) {
     final message = ModalRoute.of(context)!.settings.arguments as RemoteMessage;
+
     return Scaffold(
         appBar: AppBar(
           title: const Center(child: Text('Уведомления')),
@@ -15,7 +15,6 @@ class NotificationScreen extends StatelessWidget {
         ),
         body: Center(
           child: Column(
-            //crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
@@ -27,13 +26,20 @@ class NotificationScreen extends StatelessWidget {
                 thickness: 3,
                 color: Colors.grey,
               ),
-              const SizedBox(height: 20),
-              Text('${message.notification?.title}'),
-              const SizedBox(height: 5),
-              Text('${message.notification?.body}'),
-              const SizedBox(height: 5),
-              Text('${message.data}'),
-              const SizedBox(height: 5),
+              SizedBox(
+                width: 300,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    Text('${message.notification?.title}'),
+                    const SizedBox(height: 5),
+                    Text('${message.notification?.body}'),
+                    const SizedBox(height: 5),
+                    Text('${message.data}'),
+                    const SizedBox(height: 5),
+                  ],
+                ),
+              ),
               const Divider(
                 thickness: 2,
                 color: Colors.grey,
