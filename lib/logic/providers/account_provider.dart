@@ -69,21 +69,5 @@ class AccountProvider extends ChangeNotifier {
   }
 
   get lastLocation => _account?.lastLocation;
-
-//! Изменение Дмитрия связи с прописаннием роутов
-//==============================================================================
-  //final _sessionDataProvider = SessionDataProvider();
-
-// передача авторизирован или нет для выбора загрузки в main для initialRoute(bool isAuth)
-  bool _isAuth = false;
-  bool get isAuth => _isAuth;
-
-// проверка получен юзер ID или нет
-  Future<void> isChekAuth() async {
-    final account = await _sharedPrefs.getAccount();
-    _isAuth = account.uuid != null;
-    notifyListeners();
-    print('account.uuid!!!!!!!!!! - ${account.uuid}');
-   
-  }
+  
 }
